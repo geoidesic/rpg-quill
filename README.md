@@ -5,6 +5,11 @@ Currently data is stored in your browser – so if you clear the cache you will
 
 This code base is currently just source, not build. It is built on the Quasar Framework for VueJS, which allows one to build to various platforms.
 
+# Installation
+* First install quasar and vuejs (google them ya' lazy so-and-so!) so that you have their `cli`s installed globally.
+* Clone the repo
+* run `quasar dev` – this will launch a server on port 8080 and open it in your browser (tested on Chrome only currently)
+
 # Current features
 * Basic rules only
 * Track attributes and modifiers

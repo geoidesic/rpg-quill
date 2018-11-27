@@ -1,8 +1,8 @@
 {
-  "name": "charactershhet",
-  "version": "1.0.0",
+  "name": "rpgquill",
+  "version": "0.0.1",
   "description": "Customisable character sheet for mobile built on Quasar Framework",
-  "productName": "Character Sheet",
+  "productName": "RPG Quill | Character Sheet for D&D 5E",
   "cordovaId": "org.cordova.quasar.app",
   "author": "Noel da Costa <noeldacosta@gmail.com>",
   "private": true,
