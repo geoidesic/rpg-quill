@@ -1,0 +1,65 @@
+<template lang="pug">
+  div.row.gutter-xs.clearfix
+    div.left
+      q-select(
+        :options="options"
+        v-model="form.add_id"
+        inverted
+        color="dark"
+        separator
+        placeholder="Please select"
+        v-if="adding"
+      )
+    div.right
+      q-btn.right(
+        color="primary",
+        @click="add()"
+        v-if="adding"
+      ) +
+
+</template>
+
+<script>
+/**
+ * A generic component for choosing items from a list and assigning them to a bucket.
+ */
+export default {
+  name: 'cs-assign',
+  data () {
+    return {
+      editing: false,
+      form: {
+        add_id: null
+      }
+    }
+  },
+  props: ['storeModule', 'options', 'getter'],
+  created () {
+  },
+  computed: {
+    adding: {
+      get () {
+        return this.$store.state[this.storeModule].adding
+      },
+      set (val) {
+        this.$store.state[this.storeModule].adding = true
+      }
+    }
+  },
+  methods: {
+    add () {
+      if (!this.form.add_id) { return }
+      this.$store.commit(this.storeModule + '/ASSIGN', this.getter(this.form.add_id))
+      this.$store.dispatch(this.storeModule + '/ASSIGN')
+    },
+    edit () {
+      console.log('edit')
+      this.editing = true
+      this.adding = false
+    }
+  }
+}
+</script>
+
+<style>
+</style>
