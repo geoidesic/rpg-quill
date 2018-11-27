@@ -92,15 +92,12 @@ export default {
       this.affecting = false
     },
     affect () {
-      console.log('affect')
-      this.$q.localStorage.set('attributes', this.$store.state.attributes)
+      this.$q.localStorage.set('attribute', this.$store.state.attributes)
       this.editing = false
       this.affecting = true
     },
     save () {
-      console.log('save')
-      console.log(this.$store.state)
-      this.$q.localStorage.set('attributes', this.$store.state.attributes)
+      this.$q.localStorage.set('attribute', this.$store.state.attributes)
       this.editing = false
     }
   }

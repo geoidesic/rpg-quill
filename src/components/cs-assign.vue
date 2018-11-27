@@ -33,27 +33,27 @@ export default {
       }
     }
   },
-  props: ['storeModule', 'options', 'getter'],
+  props: ['bucketType', 'optionFinder', 'getter'],
   created () {
+    this.options = this.optionFinder(this.$store.state.profile)
   },
   computed: {
     adding: {
       get () {
-        return this.$store.state[this.storeModule].adding
+        return this.$store.state[this.bucketType].adding
       },
       set (val) {
-        this.$store.state[this.storeModule].adding = true
+        this.$store.state[this.bucketType].adding = true
       }
     }
   },
   methods: {
     add () {
       if (!this.form.add_id) { return }
-      this.$store.commit(this.storeModule + '/ASSIGN', this.getter(this.form.add_id))
-      this.$store.dispatch(this.storeModule + '/ASSIGN')
+      this.$store.commit(this.bucketType + '/ASSIGN', this.getter(this.form.add_id))
+      this.$store.dispatch(this.bucketType + '/ASSIGN')
     },
     edit () {
-      console.log('edit')
       this.editing = true
       this.adding = false
     }

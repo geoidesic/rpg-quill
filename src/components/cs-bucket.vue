@@ -6,7 +6,12 @@
     dark
     v-bind:class="cssClassObject"
   )
-    q-card-title.clearfix Weapons
+    q-card-title.clearfix {{ bucketName }}
+      component(
+        :is="rowAdder"
+        v-if="adding"
+        :bucketType="bucketType"
+      )
       q-btn(
         class="right"
         color="primary"
@@ -15,57 +20,45 @@
         ) +
     q-card-separator
     q-card-main
-      component(
-        :is="itemAdder"
-        v-if="adding"
-        :bucketType="bucketType"
-      )
       draggable(
         class="list"
         :options="{handle:'.drag-handle'}" @update="sort"
       )
         component(
-          :is="itemHandler"
-          v-for="(item, index) in equipped" v-bind:id="getRowId(item.id)"
-          :item="item"
+          :is="rowHandler"
+          v-for="(row, index) in equipped" v-bind:id="getRowId(row.id)"
+          :row="row"
           :key="index"
           :index="index"
         )
-      q-card-actions
 </template>
 
 <script>
-/**
- * A generic component for creating a bucket which holds an instance list
- * of items assigned from a master list.
- * @TODO: ideally items are also editable / addable directly instead of
- * from a master list
- */
-// import H from '../utils/helpers.js'
+import H from '../utils/helpers.js'
 import draggable from 'vuedraggable'
+import csEffect from 'components/cs-effect'
+import csEffectAdd from 'components/cs-effect-add'
+import csItem from 'components/cs-item'
+import csItemAdd from 'components/cs-item-add'
+import csProficiency from 'components/cs-proficiency'
+import csProficiencyAdd from 'components/cs-proficiency-add'
+import csSpell from 'components/cs-spell'
+import csSpellAdd from 'components/cs-spell-add'
 import csWeapon from 'components/cs-weapon'
 import csWeaponAdd from 'components/cs-weapon-add'
-// import csSkill from 'components/cs-skill'
-// import csEffect from 'components/cs-effect'
-import csAttribute from 'components/cs-attribute'
-// import csItem from 'components/cs-item'
-// import csAssign from 'components/cs-assign'
 export default {
   name: 'cs-bucket',
   data () {
     return {
     }
   },
-  mounted () {
-    console.log('this.equipped: ', this.equipped)
-  },
-  props: ['bucketType'],
+  props: ['bucketType', 'bucketName'],
   computed: {
-    itemHandler () {
-      return 'csWeapon'
+    rowHandler () {
+      return 'cs' + H.ucfirst(this.bucketType)
     },
-    itemAdder () {
-      return 'csWeaponAdd'
+    rowAdder () {
+      return 'cs' + H.ucfirst(this.bucketType) + 'Add'
     },
     cssClassObject: {
       get () {
@@ -77,7 +70,6 @@ export default {
     },
     equipped: {
       get () {
-        console.log('getting equipped: ', this.$store.state[this.bucketType].equipped)
         return this.$store.state[this.bucketType].equipped
       },
       set (val) {
@@ -86,9 +78,6 @@ export default {
     },
     adding: {
       get () {
-        console.log(this.bucketType)
-        console.log(this.$store.state)
-        console.log(this.$store.state[this.bucketType])
         return this.$store.state[this.bucketType].adding
       },
       set (val) {
@@ -97,38 +86,36 @@ export default {
     }
   },
   components: {
+    draggable,
+    csEffect,
+    csEffectAdd,
+    csItem,
+    csItemAdd,
+    csProficiency,
+    csProficiencyAdd,
+    csSpell,
+    csSpellAdd,
     csWeapon,
-    csWeaponAdd,
-    // csSkill,
-    // csEffect,
-    csAttribute,
-    // csItem,
-    // csAssign,
-    draggable
+    csWeaponAdd
   },
   methods: {
+    sort () {
+
+    },
     getRowId (id) {
       return 'item-row-' + id
     },
     add () {
       this.editing = false
       this.adding = true
-    },
-    edit () {
-      console.log('edit')
-      this.editing = true
-      this.adding = false
-    },
-    sort () {
-
     }
   }
 }
 </script>
 
 <style lang="stylus">
-.weapons {
-  min-width: 250px
+.bucket {
+  min-width: 200px
 }
 .list {
   padding: 10px 0 0 0

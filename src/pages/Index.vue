@@ -3,9 +3,10 @@
     cs-profile
     cs-attributes
     cs-weapons
-    cs-skills
+    cs-proficiencies
     cs-effects
-    cs-inventory
+    cs-items
+    cs-spells
 </template>
 
 <style lang="stylus">
@@ -70,17 +71,19 @@ import csProfile from 'components/cs-profile'
 import csAttributes from 'components/cs-attributes'
 import csWeapons from 'components/cs-weapons'
 import csEffects from 'components/cs-effects'
-import csSkills from 'components/cs-skills'
-import csInventory from 'components/cs-inventory'
+import csProficiencies from 'components/cs-proficiencies'
+import csItems from 'components/cs-items'
+import csSpells from 'components/cs-spells'
 export default {
   name: 'PageIndex',
   components: {
     csProfile,
     csAttributes,
     csWeapons,
-    csSkills,
+    csProficiencies,
     csEffects,
-    csInventory
+    csItems,
+    csSpells
   },
   data () {
     return {

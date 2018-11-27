@@ -1,6 +1,6 @@
 <template lang="pug">
   cs-assign(
-    bucketType="weapon"
+    bucketType="proficiency"
     :optionFinder="getSelectOptions"
     :getter="getById"
   )
@@ -10,7 +10,7 @@
 import csAssign from 'components/cs-assign'
 import { mapGetters } from 'vuex'
 export default {
-  name: 'cs-weapon-add',
+  name: 'cs-proficiency-add',
   data () {
     return {
       editing: false
@@ -23,10 +23,23 @@ export default {
   mounted () {
   },
   computed: {
-    ...mapGetters('weapon', [
+    ...mapGetters('proficiency', [
       'getById',
       'getSelectOptions'
-    ])
+    ]),
+    getOptions () {
+      return [{'label': 'test', 'value': 1}]
+    }
+    // getOptions: {
+    //   get () {
+    //     return [{'label': 'test', 'value': 1}]
+    //   }
+    // }
+  },
+  method: {
+    getOptions () {
+      return [{'label': 'test', 'value': 1}]
+    }
   }
 }
 </script>

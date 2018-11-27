@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import attributes from './attributes'
-import weapons from './weapons'
-import spells from './spells'
-import skills from './skills'
-import effects from './effects'
-import inventory from './inventory'
+import attribute from './attribute'
+import effect from './effect'
+import item from './item'
+import proficiency from './proficiency'
+import profile from './profile'
+import skill from './skill'
+import spell from './spell'
+import weapon from './weapon'
 
 Vue.use(Vuex)
 
@@ -18,12 +20,14 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      attributes,
-      weapons,
-      spells,
-      skills,
-      effects,
-      inventory
+      attribute,
+      effect,
+      item,
+      proficiency,
+      profile,
+      skill,
+      spell,
+      weapon
     }
   })
 

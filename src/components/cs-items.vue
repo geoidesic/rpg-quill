@@ -1,7 +1,7 @@
 <template lang="pug">
   cs-bucket(
-    bucketType="weapon"
-    bucketName="Weapons"
+    bucketType="item"
+    bucketName="Inventory"
   )
 </template>
 

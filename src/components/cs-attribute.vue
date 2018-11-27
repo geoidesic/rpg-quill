@@ -54,13 +54,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('attributes', [
+    ...mapGetters('attribute', [
       'getAttributeById',
       'getModifier'
     ]),
     full_val: {
       set (val) {
-        this.$store.commit('attributes/SET_ATTRIBUTE', { id: this.identifier, val: val })
+        this.$store.commit('attribute/SET_ATTRIBUTE', { id: this.identifier, val: val })
       },
       get () {
         return this.getAttributeById(this.identifier).full
@@ -85,33 +85,12 @@ export default {
 
   },
   created () {
-    // console.log(this.getModifier(this.identifier))
-    // this.full_val = this.getAttributeById(this.identifier).full
-    // this.temp_val = this.getAttributeById(this.identifier).modified
   },
   methods: {
-    ...mapMutations('attributes', [
+    ...mapMutations('attribute', [
       'SET_ATTRIBUTE',
       'SET_MODIFIED'
     ])
-    // modifier (attr) {
-    //   if (attr < 2) { return -5 }
-    //   if (attr < 4) { return -4 }
-    //   if (attr < 6) { return -3 }
-    //   if (attr < 8) { return -2 }
-    //   if (attr < 10) { return -1 }
-    //   if (attr < 12) { return 0 }
-    //   if (attr < 14) { return 1 }
-    //   if (attr < 16) { return 2 }
-    //   if (attr < 18) { return 3 }
-    //   if (attr < 20) { return 4 }
-    //   if (attr < 22) { return 5 }
-    //   if (attr < 24) { return 6 }
-    //   if (attr < 26) { return 7 }
-    //   if (attr < 28) { return 8 }
-    //   if (attr < 30) { return 9 }
-    //   if (attr >= 30) { return 10 }
-    // }
   }
 }
 </script>

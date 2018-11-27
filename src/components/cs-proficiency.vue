@@ -1,18 +1,18 @@
 <template lang="pug">
   cs-bucket-row(
     :row="row"
-    bucketType="item"
+    bucketType="proficiency"
   )
     template(slot="title") {{row.name}}
-    template(slot="action") {{row.cost[0]}} {{row.cost[1]}}
-    template(slot="sundry") {{ row.weight[0] }} {{ row.weight[1] }}
+    template(slot="action") {{row.attribute}}
+    template(slot="sundry")
 </template>
 
 <script>
 import csBucketRow from 'components/cs-bucket-row'
 import { mapGetters } from 'vuex'
 export default {
-  name: 'cs-item',
+  name: 'cs-proficiency',
   data () {
     return {
     }
@@ -22,18 +22,18 @@ export default {
     csBucketRow
   },
   computed: {
-    ...mapGetters('item', [
+    ...mapGetters('proficiency', [
       'getById',
       'getOptions'
     ]),
-    itemOptions: {
+    proficiencyOptions: {
       get () {
         return this.getOptions()
       }
     }
   },
   methods: {
-    getWeaponRange (id) {
+    getSkillRange (id) {
       let length = this.getById(id).range.length
       let range = ''
       if (!length) { return '0' }

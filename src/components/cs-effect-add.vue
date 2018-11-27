@@ -1,6 +1,6 @@
 <template lang="pug">
   cs-assign(
-    bucketType="weapon"
+    bucketType="effect"
     :optionFinder="getSelectOptions"
     :getter="getById"
   )
@@ -10,7 +10,7 @@
 import csAssign from 'components/cs-assign'
 import { mapGetters } from 'vuex'
 export default {
-  name: 'cs-weapon-add',
+  name: 'cs-effect-add',
   data () {
     return {
       editing: false
@@ -23,7 +23,7 @@ export default {
   mounted () {
   },
   computed: {
-    ...mapGetters('weapon', [
+    ...mapGetters('effect', [
       'getById',
       'getSelectOptions'
     ])

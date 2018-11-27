@@ -1,50 +1,26 @@
 <template lang="pug">
-  q-card(
-    inline
-    color="secondary"
-    text-color="white"
-    dark
-    class="q-ma-sm"
+  cs-bucket(
+    bucketType="effect"
+    bucketName="Effects"
   )
-    q-card-title Effects
-    q-card-separator
-    q-card-main
-      q-card-actions
-        q-btn(
-          color="primary"
-          @click="edit()"
-          v-if="!editing"
-        ) Edit
-        q-btn(
-          color="primary"
-          @click="add()"
-          v-if="!adding"
-        ) +
 </template>
 
 <script>
+// @TODO: this should become a generic list component, which can be re-used by each section using slots and props
+import csBucket from 'components/cs-bucket'
 export default {
-  name: 'csEffects',
-  data () {
-    return {
-      editing: false,
-      adding: false
-    }
-  },
-  methods: {
-    add () {
-      console.log('edit')
-      this.editing = true
-      this.adding = false
-    },
-    edit () {
-      console.log('edit')
-      this.editing = true
-      this.adding = false
-    }
+  name: 'cs-effects',
+  components: {
+    csBucket
   }
 }
 </script>
 
-<style>
+<style lang="stylus">
+.weapons {
+  min-width: 250px
+}
+.list {
+  padding: 10px 0 0 0
+}
 </style>

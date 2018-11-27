@@ -1,31 +1,28 @@
 <template lang="pug">
-  cs-item(
-    :item="item"
-    bucketType="bucketType"
+  cs-bucket-row(
+    :row="row"
+    bucketType="weapon"
   )
-    template(slot="title") {{item.name}}
-    template(slot="action") {{item.damage[0]}} {{item.damage[1]}}
-    template(slot="sundry") {{ getWeaponRange(item.id) }}
+    template(slot="title") {{row.name}}
+    template(slot="action") {{row.damage[0]}} {{row.damage[1]}}
+    template(slot="sundry") {{ getWeaponRange(row.id) }}
 </template>
 
 <script>
-import csItem from 'components/cs-item'
+import csBucketRow from 'components/cs-bucket-row'
 import { mapGetters } from 'vuex'
 export default {
   name: 'cs-weapon',
   data () {
     return {
-      editing: false
     }
   },
-  props: ['item'],
+  props: ['row'],
   components: {
-    csItem
-  },
-  mounted () {
+    csBucketRow
   },
   computed: {
-    ...mapGetters('weapons', [
+    ...mapGetters('weapon', [
       'getById',
       'getOptions'
     ]),
@@ -33,31 +30,11 @@ export default {
       get () {
         return this.getOptions()
       }
-    },
-    adding: {
-      get () {
-        return this.$store.state.weapons.adding
-      },
-      set (val) {
-        this.$store.state.weapons.adding = true
-      }
     }
-
   },
   methods: {
-    add () {
-      console.log('edit')
-      this.editing = true
-      this.adding = false
-    },
-    edit () {
-      console.log('edit')
-      this.editing = true
-      this.adding = false
-    },
     getWeaponRange (id) {
       let length = this.getById(id).range.length
-      console.log('length: ', length)
       let range = ''
       if (!length) { return '0' }
       range += this.getById(id).range[0]
@@ -71,18 +48,5 @@ export default {
 </script>
 
 <style lang="stylus">
-@import "~variables"
-.weapon {
-  background-color: rgba(255,255,255,0.2)
-  padding: 4px 8px
-  border-bottom: 2px solid $secondary
-  .dmg {
-    font-size: 80%
-    margin: 0 0.3rem
-    background-color: $tertiary
-    padding: 4px
-    border: 0px solid transparent
-    border-radius: 5px
-  }
-}
+
 </style>
