@@ -7,3 +7,7 @@ export const ASSIGN = (state, obj) => {
   }
   state.adding = false
 }
+
+export const CLEAR = (state, obj) => {
+  state.equipped.splice(state.equipped.find(item => item.id === obj.id), 1)
+}

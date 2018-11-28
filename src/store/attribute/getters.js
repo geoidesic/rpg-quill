@@ -4,12 +4,12 @@ export function someGetter (state) {
 */
 
 export const getBuffTotal = (state, getters) => (id) => {
-  let attribute = getters.getAttributeById(id)
+  let attribute = getters.getById(id)
   return attribute.buffTotal
 }
 
 export const calculateBuffTotal = (state, getters) => (id) => {
-  let attribute = getters.getAttributeById(id)
+  let attribute = getters.getById(id)
   let buffTotal = 0
   if (attribute.buffs.length) {
     attribute.buffs.forEach(function (buff, index) {
@@ -19,11 +19,11 @@ export const calculateBuffTotal = (state, getters) => (id) => {
   return buffTotal
 }
 export const getbuffTotal = (state, getters) => (id) => {
-  let attribute = getters.getAttributeById(id)
+  let attribute = getters.getById(id)
   return attribute.debuffTotal
 }
 export const calculateDebuffTotal = (state, getters) => (id) => {
-  let attribute = getters.getAttributeById(id)
+  let attribute = getters.getById(id)
   let debuffTotal = 0
   if (attribute.debuffs.length) {
     attribute.debuffs.forEach(function (debuff, index) {
@@ -33,7 +33,7 @@ export const calculateDebuffTotal = (state, getters) => (id) => {
   return debuffTotal
 }
 export const calculateModified = (state, getters) => (id) => {
-  let attribute = getters.getAttributeById(id)
+  let attribute = getters.getById(id)
   let debuffTotal = getters.getDebuffTotal(id)
   let buffTotal = getters.getBuffTotal(id)
   let buffmods = buffTotal - debuffTotal
@@ -42,7 +42,7 @@ export const calculateModified = (state, getters) => (id) => {
 }
 
 export const getModifier = (state, getters) => (id) => {
-  let val = getters.getAttributeById(id).modified
+  let val = getters.getById(id).modified
   if (val < 2) { return -5 }
   if (val < 4) { return -4 }
   if (val < 6) { return -3 }
@@ -61,6 +61,18 @@ export const getModifier = (state, getters) => (id) => {
   if (val >= 30) { return 10 }
 }
 
-export const getAttributeById = (state) => (id) => {
-  return state.find(attribute => attribute.id === id)
+export const getById = (state) => (id) => {
+  return state.options.find(attribute => attribute.id === id)
+}
+
+export const getByName = (state) => (name) => {
+  return state.options.find(attribute => attribute.name === name)
+}
+
+export const getSelectOptions = (state) => () => {
+  let options = []
+  state.options.forEach(function (item, index) {
+    options.push({ label: item.name, value: item.id })
+  })
+  return options
 }

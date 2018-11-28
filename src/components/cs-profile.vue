@@ -4,7 +4,7 @@
     color="secondary"
     text-color="white"
     dark
-    class="q-ma-sm"
+    class=" profile"
   >
     <q-card-media overlay-position="right">
       <img class="avatar" src="/assets/Kieran_Alamore-thumb.jpg" />
@@ -89,4 +89,6 @@ export default {
 </script>
 
 <style>
+.profile {
+}
 </style>

@@ -17,9 +17,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.weapons {
-  min-width: 250px
-}
+
 .list {
   padding: 10px 0 0 0
 }

@@ -2,20 +2,23 @@
   div.row.gutter-xs.clearfix
     div.left
       q-select(
+        filter
         :options="options"
         v-model="form.add_id"
         inverted
         color="dark"
         separator
-        placeholder="Please select"
-        v-if="adding"
+        placeholder=""
+        :display-value="text"
+        class="text-truncate"
+        @input="add()"
       )
-    div.right
-      q-btn.right(
-        color="primary",
-        @click="add()"
-        v-if="adding"
-      ) +
+    //- div.right
+    //-   q-btn.right(
+    //-     color="primary",
+    //-     @click="add()"
+    //-     v-if="adding"
+    //-   ) +
 
 </template>
 
@@ -38,6 +41,15 @@ export default {
     this.options = this.optionFinder(this.$store.state.profile)
   },
   computed: {
+    text () {
+      console.log(this.options)
+      console.log(this.form.add_id)
+      if (this.form.add_id) {
+        let split = this.options.find(item => item.value === this.form.add_id).label.split('&mdash;')
+        return split[0]
+      }
+      return ''
+    },
     adding: {
       get () {
         return this.$store.state[this.bucketType].adding
@@ -49,6 +61,7 @@ export default {
   },
   methods: {
     add () {
+      console.log('adding')
       if (!this.form.add_id) { return }
       this.$store.commit(this.bucketType + '/ASSIGN', this.getter(this.form.add_id))
       this.$store.dispatch(this.bucketType + '/ASSIGN')
@@ -61,5 +74,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
+.q-select {
+  max-width: 287px
+}
 </style>

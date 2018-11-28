@@ -9,7 +9,7 @@
 // @TODO: this should become a generic list component, which can be re-used by each section using slots and props
 import csBucket from 'components/cs-bucket'
 export default {
-  name: 'cs-weapons',
+  name: 'cs-items',
   components: {
     csBucket
   }
@@ -17,8 +17,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.weapons {
-  min-width: 250px
+.items {
 }
 .list {
   padding: 10px 0 0 0

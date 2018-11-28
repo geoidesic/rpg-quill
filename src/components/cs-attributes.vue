@@ -1,111 +1,19 @@
 <template lang="pug" >
-  q-card(
-    inline
-    color="secondary"
-    text-color="white"
-    dark
-    class="q-ma-sm attributes"
+  cs-bucket(
+    bucketType="attribute"
+    bucketName="Attributes"
   )
-    q-card-title Attributes
-    q-card-separator
-    q-card-main
-      cs-attribute(
-        identifier="HP"
-        showMod="false"
-        :editing="editing"
-        :affecting="affecting"
-      )
-      cs-attribute(
-        identifier="ST"
-        :editing="editing"
-        :affecting="affecting"
-      )
-      cs-attribute(
-        identifier="DX"
-        :editing="editing"
-        :affecting="affecting"
-      )
-      cs-attribute(
-        identifier="CN"
-        :editing="editing"
-        :affecting="affecting"
-      )
-      cs-attribute(
-        identifier="IN"
-        :editing="editing"
-        :affecting="affecting"
-      )
-      cs-attribute(
-        identifier="WS"
-        :editing="editing"
-        :affecting="affecting"
-      )
-      cs-attribute(
-        identifier="CH"
-        :editing="editing"
-        :affecting="affecting"
-      )
-      q-card-actions
-        q-btn(
-          color="primary"
-          @click="edit()"
-          v-if="!editing"
-        ) Edit
-        q-btn(
-          color="primary"
-          @click="save()"
-          v-if="editing"
-        ) Save
-        q-btn(
-          color="primary"
-          v-if="!affecting"
-          @click="affect()"
-        ) FX
-        q-btn(
-          color="primary"
-          @click="saveFx()"
-          v-if="affecting"
-        ) Save
 </template>
 <script>
-import csAttribute from 'components/cs-attribute'
+import csBucket from 'components/cs-bucket'
 export default {
-  name: 'csAttributes',
+  name: 'cs-attributes',
   components: {
-    csAttribute
-  },
-  data () {
-    return {
-      editing: false,
-      affecting: false
-    }
-  },
-  methods: {
-    add () {
-      console.log('add')
-      this.editing = true
-      this.affecting = false
-    },
-    edit () {
-      console.log('edit')
-      this.editing = true
-      this.affecting = false
-    },
-    affect () {
-      this.$q.localStorage.set('attribute', this.$store.state.attributes)
-      this.editing = false
-      this.affecting = true
-    },
-    save () {
-      this.$q.localStorage.set('attribute', this.$store.state.attributes)
-      this.editing = false
-    }
+    csBucket
   }
 }
 </script>
 
 <style lang="stylus">
-.attributes {
-  min-width: 150px
-}
+
 </style>

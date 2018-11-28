@@ -1,38 +1,51 @@
 <template lang="pug">
-  q-page
-    cs-profile
-    cs-attributes
-    cs-weapons
-    cs-proficiencies
-    cs-effects
-    cs-items
-    cs-spells
+  q-page.dragon.q-mt-xs.q-px-xs
+    .demo.row.gutter-xs
+      .col-xs-12.col-sm-5.col-lg-2
+        cs-profile
+      .col-xs-5.col-sm-3.col-lg-1
+        cs-attributes
+      .col-xs-7.col-sm-4.col-lg-2
+        cs-proficiencies
+      .col-xs-12.col-sm-6.col-lg-2
+        cs-weapons
+      .col-xs-12.col-sm-6.col-lg-1
+        cs-effects
+      .col-xs-12.col-sm-6.col-lg-2
+        cs-items
+      .col-xs-12.col-sm-6.col-lg-2
+        cs-spells
 </template>
 
 <style lang="stylus">
-.label-heading {
+.dragon:after
+  content : "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity : 0.2;
+  z-index: -1;
+  background-image: url('../statics/dragon-tile.png')
+  background-opacity: 0.5
+.label-heading
   font-weight: bold;
-}
-.card-1 {
+.card-1
   width: 220px
   display: inline-block
-}
-.avatar {
+.avatar
   margin: 1rem
-}
-.top-space {
+.top-space
   margin-top: 1rem
-}
-.q-card-main {
+.q-card-main
   padding-top: 0
-}
 @media print
-{
   .no-print, .no-print *, .q-btn
-  {
     display: none !important;
-  }
-}
+.hide
+  display: none
 </style>
 
 <script>

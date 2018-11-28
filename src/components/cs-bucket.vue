@@ -5,37 +5,50 @@
     text-color="white"
     dark
     v-bind:class="cssClassObject"
-  )
+    )
     q-card-title.clearfix {{ bucketName }}
-      component(
-        :is="rowAdder"
-        v-if="adding"
-        :bucketType="bucketType"
-      )
-      q-btn(
-        class="right"
+      q-btn.col-sm-3(
+        class="right action"
         color="primary"
         @click="add()"
         v-if="!adding"
-        ) +
+        icon="edit"
+        )
+      div.clearfix.row
+        component.left.col-sm-8(
+          :is="rowAdder"
+          v-if="adding"
+          :bucketType="bucketType"
+          )
+        q-btn.col-sm-3(
+          class="right action"
+          color="negative"
+          @click="cancel()"
+          v-if="adding"
+          icon="exit_to_app"
+          )
     q-card-separator
     q-card-main
       draggable(
         class="list"
         :options="{handle:'.drag-handle'}" @update="sort"
-      )
+        )
         component(
           :is="rowHandler"
           v-for="(row, index) in equipped" v-bind:id="getRowId(row.id)"
           :row="row"
           :key="index"
           :index="index"
-        )
+          )
+      q-card-actions
+        slot.col(name="actions")
 </template>
 
 <script>
 import H from '../utils/helpers.js'
 import draggable from 'vuedraggable'
+import csAttribute from 'components/cs-attribute'
+import csAttributeAdd from 'components/cs-attribute-add'
 import csEffect from 'components/cs-effect'
 import csEffectAdd from 'components/cs-effect-add'
 import csItem from 'components/cs-item'
@@ -63,8 +76,13 @@ export default {
     cssClassObject: {
       get () {
         return {
-          'q-ma-sm': true,
-          'bucket': true
+          '': true,
+          'bucket': true,
+          'weapons': this.bucketType === 'weapon',
+          'profiencies': this.bucketType === 'profiency',
+          'spells': this.bucketType === 'spell',
+          'effects': this.bucketType === 'effect',
+          'items': this.bucketType === 'item'
         }
       }
     },
@@ -87,6 +105,8 @@ export default {
   },
   components: {
     draggable,
+    csAttribute,
+    csAttributeAdd,
     csEffect,
     csEffectAdd,
     csItem,
@@ -106,18 +126,26 @@ export default {
       return 'item-row-' + id
     },
     add () {
-      this.editing = false
-      this.adding = true
+      this.$store.state[this.bucketType].adding = true
+    },
+    cancel () {
+      this.$store.state[this.bucketType].adding = false
     }
   }
 }
 </script>
 
 <style lang="stylus">
-.bucket {
-  min-width: 200px
-}
-.list {
+.bucket
+  width: 100%
+.list
   padding: 10px 0 0 0
-}
+.action
+  font-size: 80%
+  margin: 0 0.3rem
+  background-color: $tertiary
+  padding: 4px 8px
+  border: 0px solid transparent
+  border-radius: 5px
+  cursor: pointer
 </style>

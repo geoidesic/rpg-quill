@@ -1,6 +1,7 @@
 import { LocalStorage } from 'quasar'
 let state = {
   adding: false,
+  editing: false,
   equipped: [],
   options: [
     {

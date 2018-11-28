@@ -9,9 +9,23 @@
     div.left.action
       slot(name="action")
     div.left.sundry
-      span (
       slot(name="sundry")
-      span )
+    q-btn(
+      v-if="adding"
+      icon="clear"
+      size="xs"
+      color="primary"
+      class="action right"
+      @click="clear()"
+    )
+    q-btn(
+      v-if="adding"
+      icon="edit"
+      size="xs"
+      color="primary"
+      class="action right"
+      @click="edit()"
+    )
 </template>
 
 <script>
@@ -22,11 +36,10 @@ export default {
       editing: false
     }
   },
-  props: ['item', 'bucketType'],
+  props: ['row', 'bucketType'],
   mounted () {
   },
   computed: {
-
     adding: {
       get () {
         return this.$store.state[this.bucketType].adding
@@ -35,7 +48,16 @@ export default {
         this.$store.state[this.bucketType].adding = true
       }
     }
-
+  },
+  methods: {
+    clear () {
+      console.log(this.row)
+      this.$store.commit(this.bucketType + '/CLEAR', this.row.id)
+      this.$store.dispatch(this.bucketType + '/ASSIGN')
+    },
+    edit () {
+      this.$store.commit([this.bucketType + '/EDITING'], true)
+    }
   }
 }
 </script>
